@@ -3,7 +3,7 @@ var app = angular.module('back',['smart-table']);
 app.controller('basicsCtrl', ['$scope', '$http','$filter','$window',function (scope,http,filter,window) {
 
 	scope.rowCollection = [];
-	http.get('getReserved.php').success(function (data) {
+	http.get('php/getReserved.php').success(function (data) {
         console.log(data);
         scope.rowCollection = data;
     });
@@ -12,7 +12,7 @@ app.controller('basicsCtrl', ['$scope', '$http','$filter','$window',function (sc
 
     scope.removeRow = function(row) {
  
-    	http.post('delete.php',row).success(function(data) {
+    	http.post('php/delete.php',row).success(function(data) {
     		console.log(data);
     		if(data==="success")  window.location.reload();
     	});
@@ -20,7 +20,7 @@ app.controller('basicsCtrl', ['$scope', '$http','$filter','$window',function (sc
     }
 
     scope.getTicket = function(row) {
-    	http.post('confirm.php',row).success(function(data) {
+    	http.post('php/confirm.php',row).success(function(data) {
     		console.log(data);
     		if(data==="success") window.location.reload();
     	});

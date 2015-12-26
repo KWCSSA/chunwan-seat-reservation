@@ -4,7 +4,7 @@ var app = angular.module('chunwan', []);
 app.controller('MainCtrl', function ($scope, $http, $window) {
 
     var reserved = [];
-    $http.get('getReserved.php').success(function (data) {
+    $http.get('php/getReserved.php').success(function (data) {
 
         console.log(data);
 
@@ -25,7 +25,7 @@ app.controller('MainCtrl', function ($scope, $http, $window) {
 
     $scope.submit = function () {
 
-        $http.post('submit.php',{
+        $http.post('php/submit.php',{
             select:$scope.selected, 
             code:$scope.code,
             user_name:$scope.user_name,
@@ -73,16 +73,9 @@ app.controller('MainCtrl', function ($scope, $http, $window) {
     };
 
 
-    // // show selected
-    // $scope.showSelected = function () {
-    //     if ($scope.selected.length > 0) {
-    //         alert("Selected Seats: \n" + $scope.selected);
-    //     } else {
-    //         alert("No seats selected!");
-    //     }
-    // };
+   
 
 
 });
 
-// app.controller('validateCtrl',function($scope){});
+
