@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html ng-app="back">
+<head>
+    <title>Spring festival</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<link rel="stylesheet" href="css/style.css">-->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+        <meta charset="utf-8">
+
+
+</head>
+<body>
+
+<div class="container" ng-controller="basicsCtrl">
+
+<table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped">
+    <thead>
+    <tr>
+        <th st-sort="id">id</th>
+        <th st-sort="user_name">Name</th>
+        <th st-sort="user_email">Email</th>
+        <th st-sort="code">Code</th>
+        <th st-sort="time">Time</th>
+        <th st-sort="seat_pos">Seat Position</th>
+        <th st-sort="get">getTicket</th>
+    </tr>
+    <tr> 
+     <th colspan="7"><input st-search="" class="form-control" placeholder="global search ..." type="text"/></th>   
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="row in displayedCollection">
+        <td>{{row.id}}</td>
+        <td>{{row.user_name}}</td>
+        <td>{{row.user_email}}</td>
+        <td>{{row.code}}</td>
+        <td>{{row.time}}</td>
+        <td>{{row.seat_pos}}</td>
+        <td>{{tktStatus(row.getTkt)}}</td>
+         <td>
+        <button type="button" ng-show = "row.getTkt==0?true:false" ng-really-message="取票了？" ng-really-click="getTicket(row)" class="btn btn-sm btn-primary">
+            <i class="glyphicon glyphicon-ok-circle">
+            </i>
+        </button>
+        </td>
+        <td>
+        <button type="button" ng-really-message="Are you sure to remove this?" ng-really-click="removeRow(row)" class="btn btn-sm btn-danger">
+            <i class="glyphicon glyphicon-remove-circle">
+            </i>
+        </button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</div>
+
+<script src="bower_components/angular/angular.js"></script>
+
+<script src="bower_components/angular-smart-table/dist/smart-table.js"></script>
+
+<script src="js/jquery.min.js"></script>
+
+<script src="js/backCtrl.js"></script>
+<script src="js/bootstrap.min.js"></script>
+</body>
+
+</html>
