@@ -7,9 +7,17 @@ $code = $request->code;
 $name = $request->user_name;
 $email = $request->user_email;
 
+
 $db = new mysqli('localhost','root','wdtda2907','chunwan');
 
-if($result = $db->query("SELECT isUsed FROM codes WHERE code = '$code'")) {
+$result=$db->query("SELECT * FROM reserved WHERE seat_pos = '$selected'");
+
+
+if($result->num_rows >0)    echo 3;
+
+
+
+else if($result = $db->query("SELECT isUsed FROM codes WHERE code = '$code'")) {
 	if($result->num_rows >0) {
 
 		$row = $result->fetch_assoc();

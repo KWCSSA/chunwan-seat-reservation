@@ -29,7 +29,8 @@ app.controller('MainCtrl', function ($scope, $http, $window) {
             select:$scope.selected, 
             code:$scope.code,
             user_name:$scope.user_name,
-            user_email:$scope.user_email})
+            user_email:$scope.user_email
+            })
         .success(function(data){
             if(data==0){
                 alert("预订成功！请前往SLC取票。"); 
@@ -41,7 +42,9 @@ app.controller('MainCtrl', function ($scope, $http, $window) {
                 alert("此验证码已经被使用过了。请联系工作人员。");
             else if(data==2)
                 alert("验证码不对劲啊，查查看？或者联系工作人员。");
-
+            else if (data==3) 
+                alert("抱歉,在你犹豫的时候这个位子已经被订掉了TAT,请重新选择座位!");
+            
         });
 
     };
