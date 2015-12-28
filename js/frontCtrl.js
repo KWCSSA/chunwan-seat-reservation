@@ -86,6 +86,10 @@ app.controller('MainCtrl', function ($scope, $http, $window) {
           }
     };
 
+    $scope.isVIP = function(seatPos) {
+        return vip.indexOf(seatPos)> -1;
+    }
+
 
    
 

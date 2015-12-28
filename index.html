@@ -76,7 +76,7 @@
 
                 </span>
                       <br>
-                  Selected:<strong>{{selected}}</strong>
+                  <p>Selected:<strong>{{selected}}</strong><p class="padding-left"ng-show="isVIP(selected)">VIP座</p></p>
                 
             </div>
             <input class="btn btn-primary" type="submit" ng-disabled="myForm.$invalid || !haveSelected()" name="submit">
