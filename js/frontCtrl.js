@@ -4,6 +4,8 @@ var app = angular.module('chunwan', []);
 app.controller('MainCtrl', function ($scope, $http, $window) {
 
     var reserved = [];
+    var vip = ['A8','A9','B8','B9','C8','C9'];
+
     $http.get('php/getReserved.php').success(function (data) {
 
         console.log(data);
@@ -39,11 +41,17 @@ app.controller('MainCtrl', function ($scope, $http, $window) {
             }
 
             else if(data==1)
-                alert("此验证码已经被使用过了。请联系工作人员。");
+                alert("失败：此验证码已经被使用过了。请联系工作人员。");
             else if(data==2)
-                alert("验证码不对劲啊，查查看？或者联系工作人员。");
+                alert("失败：验证码不对劲啊，查查看？或者联系工作人员。");
             else if (data==3) 
-                alert("抱歉,在你犹豫的时候这个位子已经被订掉了TAT,请重新选择座位!");
+                alert("失败：抱歉,在你犹豫的时候这个位子已经被订掉了TAT,请重新选择座位!");
+            else if (data ==4) {
+                alert("失败：此验证码只能选择VIP座位。");
+            }
+            else if (data==5) {
+                alert("失败：此验证码只能选择普通座位。");
+            }
             
         });
 
@@ -73,6 +81,9 @@ app.controller('MainCtrl', function ($scope, $http, $window) {
         } else if ($scope.selected == seatPos) {
             return 'isSelected';
         }
+          else if (vip.indexOf(seatPos) > -1) {
+             return 'isVIP';
+          }
     };
 
 
