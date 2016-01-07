@@ -4,7 +4,18 @@ var app = angular.module('chunwan', []);
 app.controller('MainCtrl', function ($scope, $http, $window) {
 
     var reserved = [];
-    var vip = ['A8','A9','B8','B9','C8','C9'];
+    $scope.vip=[];
+    $scope.thir=[];
+    
+
+    $http.get('php/getLayout.php').success(function(data) {
+        $scope.rows = data[0];
+        $scope.cols = data[1];
+        $scope.vip = data[2];
+        $scope.thir = data[3];
+        console.log(data);
+        
+    });
 
     $http.get('php/getReserved.php').success(function (data) {
 
@@ -34,6 +45,7 @@ app.controller('MainCtrl', function ($scope, $http, $window) {
             user_email:$scope.user_email
             })
         .success(function(data){
+            console.log(data);
             if(data==0){
                 alert("预订成功！请前往SLC取票。"); 
                 $window.location.reload();
@@ -52,14 +64,16 @@ app.controller('MainCtrl', function ($scope, $http, $window) {
             else if (data==5) {
                 alert("失败：此验证码只能选择普通座位。");
             }
+
+              else if (data==6) {
+                alert("失败：此验证码只能选择THIR座位。");
+            }
             
         });
 
     };
 
-    // Init layout
-    $scope.rows = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J','K','L'];
-    $scope.cols = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  
 
     // Set reserved and selected
     $scope.selected = "";
@@ -81,13 +95,21 @@ app.controller('MainCtrl', function ($scope, $http, $window) {
         } else if ($scope.selected == seatPos) {
             return 'isSelected';
         }
-          else if (vip.indexOf(seatPos) > -1) {
+          else if ($scope.vip.indexOf(seatPos) > -1) {
              return 'isVIP';
+          }
+          else if($scope.thir.indexOf(seatPos) > -1) {
+            return 'isThir';
           }
     };
 
     $scope.isVIP = function(seatPos) {
-        return vip.indexOf(seatPos)> -1;
+        return $scope.vip.indexOf(seatPos)> -1;
+    }
+
+
+    $scope.isThir = function(seatPos) {
+        return $scope.thir.indexOf(seatPos)> -1;
     }
 
 
