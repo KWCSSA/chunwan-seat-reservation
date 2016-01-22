@@ -7,7 +7,7 @@ $domain = "sandboxd7e86cfe736c40d5a29b0e92112a3f6c.mailgun.org";
 date_default_timezone_set('America/New_York');
 
 $vip = array('A8','A9','B8','B9','C8','C9');
-$thir = array('A3','A4','A5','B3','B4','B5');
+
 
 $postdata = file_get_contents("php://input");
 $request = json_decode($postdata);
